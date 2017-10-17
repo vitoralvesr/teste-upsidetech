@@ -1,0 +1,9 @@
+D:\projetos\git\teste-upsidetech\DijkstraTest\bin\Debug\DijkstraTest.exe.config
+D:\projetos\git\teste-upsidetech\DijkstraTest\bin\Debug\DijkstraTest.exe
+D:\projetos\git\teste-upsidetech\DijkstraTest\bin\Debug\DijkstraTest.pdb
+D:\projetos\git\teste-upsidetech\DijkstraTest\bin\Debug\DijkstraEngine.dll
+D:\projetos\git\teste-upsidetech\DijkstraTest\bin\Debug\DijkstraEngine.pdb
+D:\projetos\git\teste-upsidetech\DijkstraTest\obj\Debug\DijkstraTest.csprojResolveAssemblyReference.cache
+D:\projetos\git\teste-upsidetech\DijkstraTest\obj\Debug\DijkstraTest.csproj.CoreCompileInputs.cache
+D:\projetos\git\teste-upsidetech\DijkstraTest\obj\Debug\DijkstraTest.exe
+D:\projetos\git\teste-upsidetech\DijkstraTest\obj\Debug\DijkstraTest.pdb
