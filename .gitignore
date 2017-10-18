@@ -1,5 +1,7 @@
 .vs
 packages
+bin/
+obj/
 *.com
 *.class
 *.dll
