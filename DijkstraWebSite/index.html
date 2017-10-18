@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="DijkstraWeb">
+<head>
+    <meta charset="UTF-8">
+    <title>Dijkstra - Upside Tech</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/@cgross/angular-notify/dist/angular-notify.min.css">
+</head>
+<body>
+    <div ng-controller="DijkstraWebController as sic">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Dijkstra</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h4>Problema</h4></div>
+                    <div class="panel-body">
+                        <p>
+                            Devido a uma restrição orçamentária, a empresa de trens de um determinado
+                            estado decidiu que todas as suas viagens de trem seriam só de uma via, ou seja,
+                            sair da cidade A para a cidade B (não necessariamente significa que existe uma
+                            saída da cidade B para a cidade A).
+                        </p>
+                        <p>
+                            Além disso, mesmo que exista este trecho, ele
+                            é independente e pode ter uma distância distinta. Esta empresa, precisa
+                            desenvolver para seus usuários um software por meio do qual será possível
+                            identificar qual é o melhor caminho para que ele chegue ao seu destino.
+                        </p>
+                        <p>
+                            Hoje sabemos que:
+                        </p>
+                        <p>
+                            <ul>
+                                <li>A distância da cidade A até a cidade B é 5.</li>
+                                <li>A distância da cidade B até a cidade C é 4.</li>
+                                <li>A distância da cidade C até a cidade D é 8.</li>
+                                <li>A distância da cidade D até a cidade C é 8.</li>
+                                <li>A distância da cidade D até a cidade E é 6.</li>
+                                <li>A distância da cidade A até a cidade D é 5.</li>
+                                <li>A distância da cidade C até a cidade E é 2.</li>
+                                <li>A distância da cidade E até a cidade B é 3.</li>
+                            </ul>
+                        </p>
+                        <p><strong>Escreva um programa que apresente:</strong></p>
+                        <p>
+                            <ol>
+                                <li>A distância da rota A-B-C.</li>
+                                <li>A distância da rota A-D.</li>
+                                <li>A distância da rota A-D-C.</li>
+                                <li>A distância da rota A-E-B-C-D.</li>
+                                <li>A distância da rota A-E-D.</li>
+                                <li>O número de viagens começando em C e terminando em C com no máximo 3 paradas. Baseado no contexto apresentado, serão 2 rotas possíveis: C-D-C (2 paradas) e C-E-B-C (3 paradas).</li>
+                                <li>O numero de viagens começando em A e terminando em C com exatamente 4 paradas. Baseado no contexto apresentado, serão 3 rotas possíveis: A para C (via B,C,D); A para C (via D,C,D); e A para C (via D,E,B).</li>
+                                <li>O tamanho da menor viagem (em termos de distância) de A para C.</li>
+                                <li>O tamanho da menor viagem (em termos de distância) de B para B.</li>
+                                <li>O numero de viagens começando em C e terminando em C com distância menor que 30. Baseado no contexto apresentado, serão as rotas seguintes: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.</li>
+                            </ol>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 1: A distância da rota A-B-C</h4></div>
+                    <div class="panel-body">
+                        A distância da rota <strong>A-B-C</strong> é igual a: {{questao1}}
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 2: A distância da rota A-D</h4></div>
+                    <div class="panel-body">
+                        A distância da rota <strong>A-D</strong> é igual a: {{questao2}}
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 3: A distância da rota A-D-C</h4></div>
+                    <div class="panel-body">
+                        A distância da rota <strong>A-D-C</strong> é igual a: {{questao3}}
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 4: A distância da rota A-E-B-C-D</h4></div>
+                    <div class="panel-body">
+                        A distância da rota <strong>A-E-B-C-D</strong> é igual a: {{questao4}}
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 5: A distância da rota A-E-D</h4></div>
+                    <div class="panel-body">
+                        A distância da rota <strong>A-E-D</strong> é igual a: {{questao5}}
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h4>Questão 6: O número de viagens começando em C e terminando em C com no máximo 3 paradas. Baseado no contexto apresentado, serão 2 rotas possíveis: C-D-C (2 paradas) e C-E-B-C (3 paradas)</h4></div>
+                    <div class="panel-body">
+                        {{questao6}}
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h4>Questão 7: O numero de viagens começando em A e terminando em C com exatamente 4 paradas. Baseado no contexto apresentado, serão 3 rotas possíveis: A para C (via B,C,D); A para C (via D,C,D); e A para C (via D,E,B).</h4></div>
+                    <div class="panel-body">
+                        {{questao7}}
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h4>Questão 8: O tamanho da menor viagem (em termos de distância) de A para C.</h4></div>
+                    <div class="panel-body">
+                        O menor caminho é o <strong>{{questao8.caminho}}</strong> que tem uma distância de {{questao8.distancia}}.
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h4>Questão 9: O tamanho da menor viagem (em termos de distância) de B para B.</h4></div>
+                    <div class="panel-body">
+                        {{questao9}}
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h4>Questão 10: O numero de viagens começando em C e terminando em C com distância menor que 30. Baseado no contexto apresentado, serão as rotas seguintes: CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC.</h4></div>
+                    <div class="panel-body">
+                        {{questao10}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/@cgross/angular-notify/dist/angular-notify.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="services/http.func.js"></script>
+    <script src="controllers/app.js"></script>
+</body>
+</html>
