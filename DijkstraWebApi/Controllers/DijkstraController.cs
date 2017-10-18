@@ -8,15 +8,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace DijkstraWebApi.Controllers
 {
     [RoutePrefix("api/dijkstra")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DijkstraController : ApiController
     {
         [AcceptVerbs("POST")]
         [Route("execute")]
-        public List<VerticeModel> ExecutarDijkstra(DijkstraModel input)
+        public CaminhoModel ExecutarDijkstra(DijkstraModel input)
         {
             DijkstraUtil util = new DijkstraUtil();
             GrafoModel grafo = util.MontaGrafo(null);
@@ -33,11 +35,22 @@ namespace DijkstraWebApi.Controllers
                 return null;
             }
 
-            return menorCaminho;
+            //monta string para buscar a distancia do percurso
+            string caminho = "";
+            foreach (VerticeModel vertice in menorCaminho)
+            {
+                caminho += "_" + vertice.ToString().Replace("Nodo_", "");
+            }
+            grafo = util.MontaGrafo(caminho.Substring(1));
+            dijkstra = new Dijkstra(grafo);
+
+            int distanciaPercurso = dijkstra.RetornaDistanciaTrajeto();
+
+            return new CaminhoModel(menorCaminho, distanciaPercurso);
         }
 
         [AcceptVerbs("GET")]
-        [Route("question1/{caminho}")]
+        [Route("questions/{caminho}")]
         public int PrimeiraQuestao(string caminho)
         {
             DijkstraUtil util = new DijkstraUtil();

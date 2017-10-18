@@ -1,4 +1,5 @@
 ﻿using DijkstraEngine.Entities;
+using DijkstraEngine.Exception;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace DijkstraEngine.Algorithm
                 }
                 else
                 {
-                    throw new Exception("Caminho não existente!");
+                    throw new PathNotFoundException("Rota não existente");
                 }
             }
             return distancia;
@@ -93,7 +94,7 @@ namespace DijkstraEngine.Algorithm
                     return aresta.Peso;
                 }
             }
-            throw new Exception();
+            throw new System.Exception();
         }
 
         private List<VerticeModel> BuscaNodosVizinhos(VerticeModel nodo)

@@ -51,7 +51,7 @@ namespace DijkstraEngine
 
             if (path == null || path.Count <= 0)
             {
-                throw new Exception();
+                throw new System.Exception();
             }
 
             foreach (VerticeModel vertex in path)

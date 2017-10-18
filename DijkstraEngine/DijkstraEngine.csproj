@@ -46,6 +46,7 @@
     <Compile Include="Entities\CidadeModel.cs" />
     <Compile Include="Entities\GrafoModel.cs" />
     <Compile Include="Entities\VerticeModel.cs" />
+    <Compile Include="Exception\PathNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TesteDijkstra.cs" />
   </ItemGroup>
