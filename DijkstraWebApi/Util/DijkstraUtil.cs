@@ -11,44 +11,29 @@ namespace DijkstraWebApi.Util
         private List<VerticeModel> nodos;
         private List<ArestaModel> arestas;
 
-        public GrafoModel MontaGrafoQuestao8()
+        public GrafoModel MontaGrafo(String caminho)
         {
-            nodos = new List<VerticeModel>();
-            arestas = new List<ArestaModel>();
-
-            //cria a lista de nodos do grafo (no caso do teste, 9 nodos)
-            for (int i = 0; i < 8; i++)
-            {
-                VerticeModel location = new VerticeModel("Nodo_" + i, "Nodo_" + i);
-                nodos.Add(location);
-            }
-
-            //adiciona as ligações possíveis (ex.: A --- 5 ---> B)
-            AdicionaAresta("Trajeto_0", 0, 1, 5);
-            AdicionaAresta("Trajeto_1", 0, 3, 5);
-            AdicionaAresta("Trajeto_2", 0, 4, 7);
-            AdicionaAresta("Trajeto_3", 1, 2, 4);
-            AdicionaAresta("Trajeto_4", 2, 3, 8);
-            AdicionaAresta("Trajeto_5", 2, 4, 2);
-            AdicionaAresta("Trajeto_6", 3, 2, 8);
-            AdicionaAresta("Trajeto_7", 3, 4, 6);
-            AdicionaAresta("Trajeto_8", 4, 1, 3);
-
-            // cria o Grafo com os Nodos e Arestas criados
-            return new GrafoModel(nodos, arestas);
-        }
-
-        public GrafoModel MontaGrafoQuestao1a5(string caminho)
-        {
-            string[] caminhoArray = caminho.Split('_');
             nodos = new List<VerticeModel>();
             arestas = new List<ArestaModel>();
 
             //cria a lista de nodos do grafo
-            for (int i = 0; i < caminhoArray.Length; i++)
+            string[] caminhoArray = null;
+            if (caminho != null)
             {
-                VerticeModel location = new VerticeModel("Nodo_" + caminhoArray[i], "Nodo_" + caminhoArray[i]);
-                nodos.Add(location);
+                caminhoArray = caminho.Split('_');
+                for (int i = 0; i < caminhoArray.Length; i++)
+                {
+                    VerticeModel location = new VerticeModel("Nodo_" + caminhoArray[i], "Nodo_" + caminhoArray[i]);
+                    nodos.Add(location);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    VerticeModel location = new VerticeModel("Nodo_" + i, "Nodo_" + i);
+                    nodos.Add(location);
+                }
             }
 
             //adiciona as ligações possíveis (ex.: A --- 5 ---> B)

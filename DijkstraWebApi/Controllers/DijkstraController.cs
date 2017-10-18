@@ -19,7 +19,7 @@ namespace DijkstraWebApi.Controllers
         public List<VerticeModel> ExecutarDijkstra(DijkstraModel input)
         {
             DijkstraUtil util = new DijkstraUtil();
-            GrafoModel grafo = util.MontaGrafoQuestao8();
+            GrafoModel grafo = util.MontaGrafo(null);
             Dijkstra dijkstra = new Dijkstra(grafo);
 
             // executa o algoritmo de Dijkstra
@@ -41,23 +41,10 @@ namespace DijkstraWebApi.Controllers
         public int PrimeiraQuestao(string caminho)
         {
             DijkstraUtil util = new DijkstraUtil();
-            GrafoModel grafo = util.MontaGrafoQuestao1a5(caminho);
+            GrafoModel grafo = util.MontaGrafo(caminho);
             Dijkstra dijkstra = new Dijkstra(grafo);
 
             return dijkstra.RetornaDistanciaTrajeto();
-
-            // executa o algoritmo de Dijkstra
-            //dijkstra.Executa(grafo.Vertices[input.Origem]);
-
-            // extrai o menor caminho
-            //List<VerticeModel> menorCaminho = dijkstra.BuscaCaminho(grafo.Vertices[input.Destino]);
-
-            //if (menorCaminho == null || menorCaminho.Count <= 0)
-            //{
-            //    return null;
-            //}
-
-            //return menorCaminho;
         }
     }
 }
