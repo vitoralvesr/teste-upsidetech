@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace DijkstraEngine.Entities
 {
+    [DataContract]
     public class VerticeModel
     {
+        [DataMember]
         readonly private String id;
+        [DataMember]
         readonly private String nome;
         
         public VerticeModel(String id, String nome)

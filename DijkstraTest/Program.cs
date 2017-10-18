@@ -23,15 +23,15 @@ namespace DijkstraTest
                 nodos.Add(location);
             }
 
-            addLane("Edge_0", 0, 1, 5);
-            addLane("Edge_1", 0, 3, 5);
-            addLane("Edge_2", 0, 4, 7);
-            addLane("Edge_3", 1, 2, 4);
-            addLane("Edge_4", 2, 3, 8);
-            addLane("Edge_5", 2, 4, 2);
-            addLane("Edge_6", 3, 2, 8);
-            addLane("Edge_7", 3, 4, 6);
-            addLane("Edge_8", 4, 1, 3);
+            addLane("Aresta_0", 0, 1, 5);
+            addLane("Aresta_1", 0, 3, 5);
+            addLane("Aresta_2", 0, 4, 7);
+            addLane("Aresta_3", 1, 2, 4);
+            addLane("Aresta_4", 2, 3, 8);
+            addLane("Aresta_5", 2, 4, 2);
+            addLane("Aresta_6", 3, 2, 8);
+            addLane("Aresta_7", 3, 4, 6);
+            addLane("Aresta_8", 4, 1, 3);
 
             //        A distância da cidade A até a cidade B é 5.
             //        A distância da cidade A até a cidade D é 5.
@@ -53,20 +53,14 @@ namespace DijkstraTest
             {
                 throw new Exception();
             }
-
-            foreach (VerticeModel vertex in path)
-            {
-                Console.WriteLine(vertex);
-            }
-
-            Console.ReadKey();
         }
 
-        public static void addLane(String laneId, int sourceLocNo, int destLocNo,
-                int duration)
+        //adiciona um trajeto para ser inserido no Grafo. (ex.: A distância da cidade A (origemAresta) até a cidade B (destinoAresta) é 5 (duração))
+        public static void AdicionaTrajeto(String id, int origemAresta, int destinoAresta,
+                int duracao)
         {
-            ArestaModel lane = new ArestaModel(laneId, nodos[sourceLocNo], nodos[destLocNo], duration);
-            arestas.Add(lane);
+            ArestaModel faixa = new ArestaModel(id, nodos[origemAresta], nodos[destinoAresta], duracao);
+            arestas.Add(faixa);
         }
     }
 }

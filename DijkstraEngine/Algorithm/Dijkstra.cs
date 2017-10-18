@@ -18,9 +18,30 @@ namespace DijkstraEngine.Algorithm
 
         public Dijkstra(GrafoModel grafo)
         {
-            // create a copy of the array so that we can operate on this array
+            // cria uma copia dos arrays, assim podemos trabalhar neles sem alterar o Grafo
             this.nodo = new List<VerticeModel>(grafo.Vertices);
             this.arestas = new List<ArestaModel>(grafo.Arestas);
+        }
+
+        public int RetornaDistanciaTrajeto()
+        {
+            nodosResolvidos = new HashSet<VerticeModel>();
+            nodosNaoResolvidos = new HashSet<VerticeModel>();
+
+            int distancia = 0;
+            for (int i = 0; i < nodo.Count - 1; i++)
+            {
+                List<VerticeModel> vizinhos = BuscaNodosVizinhos(nodo[i]);
+                if (vizinhos.Exists(w => w.ToString().Equals(nodo[i + 1].ToString())))
+                {
+                    distancia += BuscaDistancia(nodo[i], nodo[i+1]);
+                }
+                else
+                {
+                    throw new Exception("Caminho não existente!");
+                }
+            }
+            return distancia;
         }
 
         public void Executa(VerticeModel origem)
@@ -29,7 +50,11 @@ namespace DijkstraEngine.Algorithm
             nodosNaoResolvidos = new HashSet<VerticeModel>();
             distancia = new Dictionary<VerticeModel, int>();
             antecessores = new Dictionary<VerticeModel, VerticeModel>();
+
+            //cria uma distancia inicial 0, ja que origem até origem tem distancia = 0
             distancia.Add(origem, 0);
+
+            //lista de nodos que ainda não foram testados
             nodosNaoResolvidos.Add(origem);
             while (nodosNaoResolvidos.Count > 0)
             {
@@ -42,31 +67,33 @@ namespace DijkstraEngine.Algorithm
 
         private void EncontraDistanciasMinimas(VerticeModel nodo)
         {
+            //busca os nodos vizinhos (os quais o nodo principal tem acesso)
             List<VerticeModel> nodosAdjacentes = BuscaNodosVizinhos(nodo);
-            foreach (VerticeModel nodoAlvo in nodosAdjacentes)
+
+            foreach (VerticeModel nodoDestino in nodosAdjacentes)
             {
-                if (BuscaMenorDistancia(nodoAlvo) > BuscaMenorDistancia(nodo)
-                        + BuscaDistancia(nodo, nodoAlvo))
+                if (BuscaMenorDistancia(nodoDestino) > BuscaMenorDistancia(nodo)
+                        + BuscaDistancia(nodo, nodoDestino))
                 {
-                    distancia.Add(nodoAlvo, BuscaMenorDistancia(nodo)
-                            + BuscaDistancia(nodo, nodoAlvo));
-                    antecessores.Add(nodoAlvo, nodo);
-                    nodosNaoResolvidos.Add(nodoAlvo);
+                    distancia.Add(nodoDestino, BuscaMenorDistancia(nodo)
+                            + BuscaDistancia(nodo, nodoDestino));
+                    antecessores.Add(nodoDestino, nodo);
+                    nodosNaoResolvidos.Add(nodoDestino);
                 }
             }
         }
 
-        private int BuscaDistancia(VerticeModel nodo, VerticeModel nodoAlvo)
+        private int BuscaDistancia(VerticeModel nodo, VerticeModel nodoDestino)
         {
             foreach(ArestaModel aresta in arestas)
             {
                 if (aresta.Origem.Equals(nodo)
-                        && aresta.Destino.Equals(nodoAlvo))
+                        && aresta.Destino.Equals(nodoDestino))
                 {
                     return aresta.Peso;
                 }
             }
-            throw new Exception("Should not happen");
+            throw new Exception();
         }
 
         private List<VerticeModel> BuscaNodosVizinhos(VerticeModel nodo)
@@ -110,8 +137,7 @@ namespace DijkstraEngine.Algorithm
 
         private int BuscaMenorDistancia(VerticeModel destino)
         {
-            int d;
-            if (distancia.TryGetValue(destino, out d))
+            if (distancia.TryGetValue(destino, out int d))
             {
                 return d;
             }
@@ -122,17 +148,15 @@ namespace DijkstraEngine.Algorithm
         }
 
         /*
-         * This method returns the path from the source to the selected target and
-         * NULL if no path exists
+         * Esse método retorna o caminho da origem até o destino ou Null caso o caminho seja impossível
          */
-        public List<VerticeModel> BuscaCaminho(VerticeModel nodoAlvo)
+        public List<VerticeModel> BuscaCaminho(VerticeModel nodoDestino)
         {
             LinkedList<VerticeModel> caminho = new LinkedList<VerticeModel>();
-            VerticeModel aux = nodoAlvo;
+            VerticeModel aux = nodoDestino;
 
-            // check if a path exists
-            VerticeModel verticeRetornado = null;
-            if (!antecessores.TryGetValue(aux, out verticeRetornado))
+            // checa se o caminho existe, verificando a exitencia do destino nos nodos encontrados
+            if (!antecessores.TryGetValue(aux, out VerticeModel verticeRetornado))
             {
                 return null;
             }
@@ -143,7 +167,7 @@ namespace DijkstraEngine.Algorithm
                 caminho.AddLast(aux);
             }
 
-            // Put it into the correct order
+            // coloca a lista na ordem correta
             return caminho.Reverse().ToList();
         }
     }

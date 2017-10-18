@@ -1,6 +1,0 @@
-D:\projetos\git\teste-upsidetech\DijkstraEngine\bin\Debug\DijkstraEngine.dll
-D:\projetos\git\teste-upsidetech\DijkstraEngine\bin\Debug\DijkstraEngine.pdb
-D:\projetos\git\teste-upsidetech\DijkstraEngine\obj\Debug\DijkstraEngine.csproj.CoreCompileInputs.cache
-D:\projetos\git\teste-upsidetech\DijkstraEngine\obj\Debug\DijkstraEngine.dll
-D:\projetos\git\teste-upsidetech\DijkstraEngine\obj\Debug\DijkstraEngine.pdb
-D:\projetos\git\teste-upsidetech\DijkstraEngine\obj\Debug\DijkstraEngine.csprojResolveAssemblyReference.cache
